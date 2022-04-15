@@ -1,0 +1,48 @@
+p {
+  margin: 0 0 4px 0;
+  color: var(--text-color);
+  line-height: 1;
+}
+
+.inputs-group__title {
+  font-size: 1.5rem;
+}
+
+.calc-container {
+  display: flex;
+  justify-content: center;
+  column-gap: 16px;
+}
+
+.input-container {
+  width: 500px;
+  margin: 32px 0;
+}
+
+::ng-deep {
+  .p-inputnumber-input {
+    border-radius: 0;
+  }
+}
+
+.calc-details {
+  border-radius: 4px;
+  background-color: aliceblue;
+  padding:  24px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+  &__row {
+    &__total-amount {
+      .calc-details__number {
+        font-size: 1.5rem;
+      }
+    }
+  }
+  &__label {
+    color: var(--gray-600);
+  }
+  &__number {
+    font-weight: bold;
+  }
+}

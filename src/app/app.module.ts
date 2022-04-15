@@ -4,7 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { InputNumberModule } from 'primeng/inputnumber';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SliderModule } from 'primeng/slider';
 
 @NgModule({
   declarations: [
@@ -14,9 +15,10 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     InputNumberModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    SliderModule,
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

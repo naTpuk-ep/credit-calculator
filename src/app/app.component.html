@@ -1,0 +1,70 @@
+<div class="calc-container">
+    <form
+      [formGroup]="formGroup"
+      class="inputs-group p-component"
+    >
+      <p class="inputs-group__title">Условия кредита</p>
+      <div class="p-grid p-fluid input-container">
+        <p>Сумма кредита</p>
+        <p-inputNumber
+          [allowEmpty]="false"
+          class="p-field"
+          mode="decimal"
+          [useGrouping]="false"
+          [min]="minTotalAmount"
+          [max]="maxTotalAmount"
+          [maxlength]="7"
+          formControlName="totalAmount"
+          (onInput)="totalAmountChange($event)"
+        ></p-inputNumber>
+        <p-slider
+          [min]="minTotalAmount"
+          [max]="maxTotalAmount"
+          [step]="totalAmountStep"
+          formControlName="totalAmount"
+          (onChange)="totalAmountChange($event)"
+        ></p-slider>
+      </div>
+      <div class="p-grid p-fluid input-container">
+        <p>Срок кредита</p>
+        <p-inputNumber
+          [allowEmpty]="false"
+          class="p-field"
+          mode="decimal"
+          [useGrouping]="false"
+          [min]="minMonths"
+          [max]="maxMonths"
+          [maxlength]="7"
+          formControlName="months"
+          (onInput)="monthsChange($event)"
+        ></p-inputNumber>
+        <p-slider
+          [min]="minMonths"
+          [max]="maxMonths"
+          [step]="1"
+          formControlName="months"
+          (onChange)="monthsChange($event)"
+        ></p-slider>
+      </div>
+    </form>
+    <div class="calc-details p-grid p-fluid p-component">
+      <div class="calc-details__row calc-details__row__total-amount">
+        <p class="calc-details__label">Ежемесячный платеж</p>
+        <p class="calc-details__number">130000</p>
+      </div>
+      <div class="calc-details__row">
+        <p class="calc-details__label">Ставка от</p>
+        <p class="calc-details__number">15,9%</p>
+      </div>
+      <div class="calc-details__row">
+        <p class="calc-details__label">Срок кредита</p>
+        <p class="calc-details__number">15,9%</p>
+      </div>
+      <div class="calc-details__row">
+        <p class="calc-details__label">Сумма кредита</p>
+        <p class="calc-details__number">15,9%</p>
+      </div>
+    </div>
+
+  </div>
+
