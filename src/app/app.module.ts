@@ -6,10 +6,12 @@ import { AppComponent } from './app.component';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SliderModule } from 'primeng/slider';
+import { CalcInputComponent } from './calc-input/calc-input.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CalcInputComponent,
   ],
   imports: [
     BrowserModule,

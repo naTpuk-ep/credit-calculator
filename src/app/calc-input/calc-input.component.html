@@ -1,0 +1,24 @@
+<div class="input-relative">
+  <div
+    (click)="hideInputView($event)"
+    class="p-inputtext input-view"
+  >{{ this.viewTransformer(value) }}</div>
+  <p-inputNumber
+    [allowEmpty]="false"
+    class="p-field"
+    mode="decimal"
+    [useGrouping]="false"
+    [min]="min"
+    [max]="max"
+    [maxlength]="maxlength"
+    [(ngModel)]="value"
+    (onInput)="inputChange($event)"
+  ></p-inputNumber>
+</div>
+<p-slider
+  [min]="min"
+  [max]="max"
+  [step]="step"
+  [(ngModel)]="value"
+  (onChange)="inputChange($event)"
+></p-slider>

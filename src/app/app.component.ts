@@ -1,5 +1,14 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  QueryList,
+  ViewChildren,
+} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { InputNumber } from 'primeng/inputnumber';
+
 
 interface IFormValue {
   totalAmount: number;
@@ -12,7 +21,8 @@ interface IFormValue {
   styleUrls: ['./app.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
+  @ViewChildren('inputNumber') inputNumberList!: QueryList<InputNumber>;
   formGroup!: FormGroup;
   totalAmountStep = 50e3;
   minTotalAmount = 30e3;
@@ -38,16 +48,6 @@ export class AppComponent implements OnInit{
     this.formGroup = this.fb.group({
       totalAmount: [this.initialTotalAmount],
       months: [this.initialMonths],
-    })
-  }
-
-  totalAmountChange({ value }: { value: number }) {
-    if (value > this.maxTotalAmount) value = this.maxTotalAmount;
-    this.formGroup.patchValue(<IFormValue>{ totalAmount: value });
-  }
-
-  monthsChange({ value }: { value: number }) {
-    if (value > this.maxMonths) value = this.maxMonths;
-    this.formGroup.patchValue(<IFormValue>{ months: value });
+    });
   }
 }

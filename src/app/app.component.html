@@ -6,45 +6,25 @@
       <p class="inputs-group__title">Условия кредита</p>
       <div class="p-grid p-fluid input-container">
         <p>Сумма кредита</p>
-        <p-inputNumber
-          [allowEmpty]="false"
-          class="p-field"
-          mode="decimal"
-          [useGrouping]="false"
-          [min]="minTotalAmount"
-          [max]="maxTotalAmount"
-          [maxlength]="7"
-          formControlName="totalAmount"
-          (onInput)="totalAmountChange($event)"
-        ></p-inputNumber>
-        <p-slider
-          [min]="minTotalAmount"
-          [max]="maxTotalAmount"
-          [step]="totalAmountStep"
-          formControlName="totalAmount"
-          (onChange)="totalAmountChange($event)"
-        ></p-slider>
+        <div class="input-relative">
+          <app-calc-input
+            [min]="minTotalAmount"
+            [max]="maxTotalAmount"
+            [maxlength]="7"
+            [step]="totalAmountStep"
+            formControlName="totalAmount"
+          ></app-calc-input>
       </div>
-      <div class="p-grid p-fluid input-container">
-        <p>Срок кредита</p>
-        <p-inputNumber
-          [allowEmpty]="false"
-          class="p-field"
-          mode="decimal"
-          [useGrouping]="false"
-          [min]="minMonths"
-          [max]="maxMonths"
-          [maxlength]="7"
-          formControlName="months"
-          (onInput)="monthsChange($event)"
-        ></p-inputNumber>
-        <p-slider
-          [min]="minMonths"
-          [max]="maxMonths"
-          [step]="1"
-          formControlName="months"
-          (onChange)="monthsChange($event)"
-        ></p-slider>
+        <div class="p-grid p-fluid input-container">
+          <p>Срок кредита</p>
+          <app-calc-input
+            [min]="minMonths"
+            [max]="maxMonths"
+            [maxlength]="2"
+            [step]="1"
+            formControlName="months"
+          ></app-calc-input>
+        </div>
       </div>
     </form>
     <div class="calc-details p-grid p-fluid p-component">
