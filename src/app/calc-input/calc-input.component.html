@@ -2,8 +2,12 @@
   <div
     (click)="hideInputView($event)"
     class="p-inputtext input-view"
-  >{{ this.viewTransformer(value) }}</div>
+    [class.input-view__hidden]="focus"
+  >
+    {{ viewTransformer ? viewTransformer(valueFormControl.value) :  valueFormControl.value}}
+  </div>
   <p-inputNumber
+    #inputNumber
     [allowEmpty]="false"
     class="p-field"
     mode="decimal"
@@ -11,14 +15,15 @@
     [min]="min"
     [max]="max"
     [maxlength]="maxlength"
-    [(ngModel)]="value"
     (onInput)="inputChange($event)"
+    [formControl]="valueFormControl"
+    (onBlur)="inputOnblur()"
   ></p-inputNumber>
 </div>
 <p-slider
   [min]="min"
   [max]="max"
-  [step]="step"
-  [(ngModel)]="value"
+  [step]="step || 1"
+  [formControl]="valueFormControl"
   (onChange)="inputChange($event)"
 ></p-slider>

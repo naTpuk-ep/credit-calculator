@@ -11,4 +11,7 @@
 
 .input-view {
   position: absolute;
+  &__hidden {
+    display: none;
+  }
 }
