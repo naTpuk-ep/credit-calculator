@@ -60,7 +60,6 @@ describe('AppComponent', () => {
 
   it('transformAmountValue should return locale string', () => {
     const amountString = appComponent.transformAmountValue(1500);
-    console.log(amountString);
     expect(amountString)
       .toBe('1 500 ₽');
   });
