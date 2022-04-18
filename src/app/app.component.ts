@@ -7,9 +7,10 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { CalcService } from './calc.service';
 
 
-interface IFormValue {
+export interface IFormValue {
   totalAmount: number;
   months: number;
+  switch: boolean;
 }
 
 @Component({
@@ -34,20 +35,16 @@ export class AppComponent implements OnInit {
     this.transformMonths = this.transformMonths.bind(this);
   }
 
-  log() {
-    console.log(this.formValue);
-  }
-
   ngOnInit() {
     this.initFormGroup();
   }
 
   transformLoanRate(value: number): string {
-    return value.toLocaleString('ru') + ' %';
+    return `${value.toLocaleString('ru')} %`;
   }
 
   transformAmountValue(value: number) {
-    return value.toLocaleString('ru') + ' ₽';
+    return `${value.toLocaleString('ru')} ₽`;
   }
 
   transformMonths(value: number) {
