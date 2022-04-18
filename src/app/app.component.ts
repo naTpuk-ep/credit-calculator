@@ -1,16 +1,10 @@
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   OnInit,
-  QueryList,
-  ViewChildren,
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { InputNumber } from 'primeng/inputnumber';
 import { CalcService } from './calc.service';
-import { map, switchMap } from 'rxjs/operators';
-import { Observable, Subject } from 'rxjs';
 
 
 interface IFormValue {
@@ -27,18 +21,18 @@ interface IFormValue {
 })
 export class AppComponent implements OnInit {
   formGroup!: FormGroup;
-  loanRate = 15.9;
   totalAmountStep = 50e3;
   minTotalAmount = 30e3;
   maxTotalAmount = 7e6;
   minMonths = 6;
   maxMonths = 84;
-  monthLyAmount$!: Observable<number>;
   private initialTotalAmount = 1.5e6;
   private initialMonths = 60;
   private fb = new FormBuilder();
 
-  constructor(private calcService: CalcService) {}
+  constructor(private calcService: CalcService) {
+    this.transformMonths = this.transformMonths.bind(this);
+  }
 
   log() {
     console.log(this.formValue);
@@ -48,8 +42,34 @@ export class AppComponent implements OnInit {
     this.initFormGroup();
   }
 
-  transformTotalAmountValue(value: number) {
-    return `${value} - ${value}`;
+  transformLoanRate(value: number): string {
+    return value.toLocaleString('ru') + ' %';
+  }
+
+  transformAmountValue(value: number) {
+    return value.toLocaleString('ru') + ' ₽';
+  }
+
+  transformMonths(value: number) {
+    const years = Math.floor(value / 12);
+    const months = value % 12;
+    return (years ? `${years} ${this.calcService.numWord(
+      years,
+      [
+        'год',
+        'года',
+        'лет',
+      ],
+      )}` : '')
+      + ' ' +
+      (months ? `${months} ${this.calcService.numWord(
+        months,
+        [
+          'месяц',
+          'месяца',
+          'месяцев',
+        ],
+      )}` : '');
   }
 
   get formValue() {
@@ -60,14 +80,18 @@ export class AppComponent implements OnInit {
     return this.calcService.getMonthlyAmount({
       months: this.formValue.months,
       totalAmount: this.formValue.totalAmount,
-      loanRate: this.loanRate,
-    })
+    });
+  }
+
+  get loanRate() {
+    return this.calcService.loanRate;
   }
 
   private initFormGroup() {
     this.formGroup = this.fb.group({
       totalAmount: [this.initialTotalAmount],
       months: [this.initialMonths],
+      switch: false,
     });
   }
 }

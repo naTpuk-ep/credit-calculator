@@ -7,6 +7,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SliderModule } from 'primeng/slider';
 import { CalcInputComponent } from './calc-input/calc-input.component';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { CalcInputComponent } from './calc-input/calc-input.component';
     FormsModule,
     ReactiveFormsModule,
     SliderModule,
+    InputSwitchModule,
   ],
   bootstrap: [AppComponent]
 })

@@ -1,7 +1,5 @@
 p {
   margin: 0 0 4px 0;
-  color: var(--text-color);
-  line-height: 1;
 }
 
 .inputs-group__title {
@@ -12,11 +10,21 @@ p {
   display: flex;
   justify-content: center;
   column-gap: 16px;
+  -webkit-column-gap: 16px;
+  -moz-column-gap: 16px;
 }
 
 .input-container {
   width: 500px;
   margin: 32px 0;
+}
+
+.switch-container {
+  display: flex;
+  align-items: center;
+  -webkit-column-gap: 16px;
+  -moz-column-gap: 16px;
+  column-gap: 16px;
 }
 
 .calc-details {

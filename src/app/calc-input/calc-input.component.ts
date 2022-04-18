@@ -25,25 +25,27 @@ import { InputNumber } from 'primeng/inputnumber';
 })
 export class CalcInputComponent implements ControlValueAccessor, OnInit {
   @ViewChild('inputNumber') inputNumber!: InputNumber;
-  valueFormControl = new FormControl();
   @Input() min!: number;
   @Input() max!: number;
-  @Input() maxlength!: number;
   @Input() step!: number;
   @Input() viewTransformer!: (value: number) => string;
+  valueFormControl = new FormControl();
   focus = false;
+  maxlength!: number;
 
   private onChange!: (value: number) => void;
   private onTouched!: () => void;
 
-  constructor(private cdRef: ChangeDetectorRef) {}
-
   ngOnInit(): void {
+    this.maxlength = `${this.max}`.length;
   }
 
   inputChange({ value }: { value: number }) {
-    if (this.max && value > this.max) value = this.max;
-    if (this.maxlength && this.max && `${value}`.length > this.maxlength) value = this.max;
+    if (this.max && value && value > this.max) value = this.max;
+    if (this.maxlength && value && this.max && `${value}`.length > this.maxlength) value = this.max;
+    if (!value || value < this.min) {
+      return;
+    }
     this.valueFormControl.patchValue(value);
     this.onChange(value);
   }
@@ -67,7 +69,8 @@ export class CalcInputComponent implements ControlValueAccessor, OnInit {
   }
 
   inputOnblur() {
-    if (!this.min || this.valueFormControl.value <= this.min) {
+    if (!this.valueFormControl.value || this.valueFormControl.value <= this.min) {
+      this.valueFormControl.patchValue(this.min);
       this.onChange(this.min);
     }
     this.focus = false;
