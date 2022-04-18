@@ -55,13 +55,13 @@ describe('AppComponent', () => {
   it('transformLoanRate should return locale string', () => {
     const loanRateString = appComponent.transformLoanRate(appComponent.loanRate);
     expect(loanRateString)
-      .toBe('15,9 %');
+      .toBe('15,9 %');
   });
 
   it('transformAmountValue should return locale string', () => {
     const amountString = appComponent.transformAmountValue(1500);
     expect(amountString)
-      .toBe('1 500 ₽');
+      .toBe('1 500 ₽');
   });
 
 });

@@ -40,11 +40,11 @@ export class AppComponent implements OnInit {
   }
 
   transformLoanRate(value: number): string {
-    return `${value.toLocaleString('ru')} %`;
+    return `${value.toLocaleString('ru')} %`;
   }
 
   transformAmountValue(value: number) {
-    return `${value.toLocaleString('ru')} ₽`;
+    return `${value.toLocaleString('ru')} ₽`;
   }
 
   transformMonths(value: number) {
