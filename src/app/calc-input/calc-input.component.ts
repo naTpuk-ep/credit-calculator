@@ -41,8 +41,9 @@ export class CalcInputComponent implements ControlValueAccessor, OnInit {
   }
 
   inputChange({ value }: { value: number }) {
-    if (this.max && value && value > this.max) value = this.max;
-    if (this.maxlength && value && this.max && `${value}`.length > this.maxlength) value = this.max;
+    if (this.max && value && value > this.max || `${value}`.length > this.maxlength) {
+      value = this.max;
+    }
     if (!value || value < this.min) {
       return;
     }
@@ -51,7 +52,7 @@ export class CalcInputComponent implements ControlValueAccessor, OnInit {
   }
 
 
-  hideInputView(event: MouseEvent) {
+  hideInputView() {
     this.focus = true;
     this.inputNumber.input.nativeElement.focus();
   }
