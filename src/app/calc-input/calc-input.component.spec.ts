@@ -81,7 +81,7 @@ describe('CalcInputComponent', () => {
         }
       }
     }
-    component.hideInputView();
+    component.focusInput();
     expect(component.focus)
       .toBe(true);
   });

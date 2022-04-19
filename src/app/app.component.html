@@ -6,13 +6,13 @@
       <p class="inputs-group__title">Условия кредита</p>
       <div class="p-grid p-fluid input-container">
         <p>Сумма кредита</p>
-          <app-calc-input
-            [min]="minTotalAmount"
-            [max]="maxTotalAmount"
-            [step]="totalAmountStep"
-            formControlName="totalAmount"
-            [viewTransformer]="transformAmountValue"
-          ></app-calc-input>
+        <app-calc-input
+          [min]="minTotalAmount"
+          [max]="maxTotalAmount"
+          [step]="totalAmountStep"
+          formControlName="totalAmount"
+          [viewTransformer]="transformAmountValue"
+        ></app-calc-input>
       </div>
       <div class="p-grid p-fluid input-container">
         <p>Срок кредита</p>

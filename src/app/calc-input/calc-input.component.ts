@@ -1,5 +1,5 @@
 import {
-  ChangeDetectionStrategy, ChangeDetectorRef,
+  ChangeDetectionStrategy,
   Component,
   forwardRef,
   Input,
@@ -41,10 +41,10 @@ export class CalcInputComponent implements ControlValueAccessor, OnInit {
   }
 
   inputChange({ value }: { value: number }) {
-    if (this.max && value && value > this.max || `${value}`.length > this.maxlength) {
+    if (this.max && value && ((value > this.max) || `${value}`.length > this.maxlength)) {
       value = this.max;
     }
-    if (!value || value < this.min) {
+    if (!value || value <= this.min) {
       return;
     }
     this.valueFormControl.patchValue(value);
@@ -52,9 +52,17 @@ export class CalcInputComponent implements ControlValueAccessor, OnInit {
   }
 
 
-  hideInputView() {
+  focusInput() {
     this.focus = true;
     this.inputNumber.input.nativeElement.focus();
+  }
+
+  inputOnblur() {
+    if (!this.valueFormControl.value || this.valueFormControl.value <= this.min) {
+      this.valueFormControl.patchValue(this.min);
+      this.onChange(this.min);
+    }
+    this.focus = false;
   }
 
   writeValue(value: number) {
@@ -67,13 +75,5 @@ export class CalcInputComponent implements ControlValueAccessor, OnInit {
 
   registerOnTouched(fn: () => void) {
     this.onTouched = fn;
-  }
-
-  inputOnblur() {
-    if (!this.valueFormControl.value || this.valueFormControl.value <= this.min) {
-      this.valueFormControl.patchValue(this.min);
-      this.onChange(this.min);
-    }
-    this.focus = false;
   }
 }
