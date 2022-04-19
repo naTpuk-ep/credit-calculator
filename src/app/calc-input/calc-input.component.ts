@@ -44,13 +44,12 @@ export class CalcInputComponent implements ControlValueAccessor, OnInit {
     if (this.max && value && ((value > this.max) || `${value}`.length > this.maxlength)) {
       value = this.max;
     }
-    if (!value || value <= this.min) {
+    if (!value || value < this.min) {
       return;
     }
     this.valueFormControl.patchValue(value);
     this.onChange(value);
   }
-
 
   focusInput() {
     this.focus = true;
