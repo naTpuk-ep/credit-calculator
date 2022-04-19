@@ -35,24 +35,4 @@ describe('CalcService', () => {
     expect(monthlyAmount)
       .toBe(138637);
   });
-
-  it('numWord should choose the right string', function () {
-    const words = ['год', 'года', 'лет'];
-    let word = calcService.numWord(1, words);
-    expect(word)
-      .toBe('год');
-
-    word = calcService.numWord(2, words);
-    expect(word)
-      .toBe('года');
-
-    word = calcService.numWord(5, words);
-    expect(word)
-      .toBe('лет');
-
-    word = calcService.numWord(12, words);
-    expect(word)
-      .toBe('лет');
-  });
-
 });

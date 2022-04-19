@@ -4,6 +4,8 @@ import { AppComponent, IFormValue } from './app.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CalcService } from './shared/services/calc.service';
+import { LocalePipe } from './shared/pipes/locale.pipe';
+import { NumWordPipe } from './shared/pipes/num-word.pipe';
 
 
 describe('AppComponent', () => {
@@ -17,9 +19,15 @@ describe('AppComponent', () => {
       ],
       declarations: [
         AppComponent,
+        LocalePipe,
+        NumWordPipe
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      providers: [CalcService],
+      providers: [
+        CalcService,
+        LocalePipe,
+        NumWordPipe
+      ],
     })
       .compileComponents();
   });
@@ -50,12 +58,6 @@ describe('AppComponent', () => {
         months: (appComponent as any).initialMonths,
         switch: false,
       });
-  });
-
-  it('transformLoanRate should return locale string', () => {
-    const loanRateString = appComponent.transformLoanRate(appComponent.loanRate);
-    expect(loanRateString)
-      .toBe('15,9 %');
   });
 
   it('transformAmountValue should return locale string', () => {

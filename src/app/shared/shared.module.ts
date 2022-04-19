@@ -4,7 +4,7 @@ import { LocalePipe } from './pipes/locale.pipe';
 
 
 @NgModule({
-  declarations: [ NumWordPipe, LocalePipe],
+  declarations: [NumWordPipe, LocalePipe],
   exports: [LocalePipe, NumWordPipe]
 })
 export class SharedModule {}
