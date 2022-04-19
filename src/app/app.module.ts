@@ -8,15 +8,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SliderModule } from 'primeng/slider';
 import { CalcInputComponent } from './calc-input/calc-input.component';
 import { InputSwitchModule } from 'primeng/inputswitch';
-import { NumWordPipe } from './shared/pipes/num-word.pipe';
-import { LocalePipe } from './shared/pipes/locale.pipe';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     CalcInputComponent,
-    NumWordPipe,
-    LocalePipe
   ],
   imports: [
     BrowserModule,
@@ -26,6 +23,7 @@ import { LocalePipe } from './shared/pipes/locale.pipe';
     ReactiveFormsModule,
     SliderModule,
     InputSwitchModule,
+    SharedModule
   ],
   bootstrap: [AppComponent]
 })
