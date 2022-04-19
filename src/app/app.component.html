@@ -31,11 +31,11 @@
     <div class="calc-details p-grid p-fluid p-component">
       <div class="calc-details__row calc-details__row__total-amount">
         <p class="calc-details__label">Ежемесячный платеж</p>
-        <p class="calc-details__number">{{ transformAmountValue(monthLyAmount) }}</p>
+        <p class="calc-details__number">{{ monthLyAmount | locale: '₽' }}</p>
       </div>
       <div class="calc-details__row">
         <p class="calc-details__label">Ставка от</p>
-        <p class="calc-details__number">{{ transformLoanRate(loanRate) }}</p>
+        <p class="calc-details__number">{{ loanRate | locale: '%' }}</p>
       </div>
       <div class="calc-details__row">
         <p class="calc-details__label">Срок кредита</p>

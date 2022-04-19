@@ -4,7 +4,9 @@ import {
   OnInit,
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { CalcService } from './calc.service';
+import { CalcService } from './shared/services/calc.service';
+import { NumWordPipe } from './shared/pipes/num-word.pipe';
+import { LocalePipe } from './shared/pipes/locale.pipe';
 
 
 export interface IFormValue {
@@ -18,7 +20,7 @@ export interface IFormValue {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [CalcService],
+  providers: [CalcService, NumWordPipe, LocalePipe],
 })
 export class AppComponent implements OnInit {
   formGroup!: FormGroup;
@@ -31,36 +33,27 @@ export class AppComponent implements OnInit {
   private initialMonths = 60;
   private fb = new FormBuilder();
 
-  constructor(private calcService: CalcService) {
-    this.transformMonths = this.transformMonths.bind(this);
+  constructor(private calcService: CalcService, private numWord: NumWordPipe, public localePipe: LocalePipe) {
+    this.transformMonths =  this.transformMonths.bind(this);
+    this.transformAmountValue = this.transformAmountValue.bind(this);
   }
 
   ngOnInit() {
     this.initFormGroup();
   }
 
-  transformLoanRate(value: number): string {
-    return `${value.toLocaleString('ru')} %`.replace(/ /g, ' ');
-  }
-
   transformAmountValue(value: number) {
-    return `${value.toLocaleString('ru')} ₽`.replace(/ /g, ' ');
+    return this.localePipe.transform(value, '₽');
   }
 
   transformMonths(value: number) {
     const years = Math.floor(value / 12);
     const months = value % 12;
     return (
-        years
-          ? `${years} ${this.calcService.numWord(years, ['год', 'года', 'лет'])}`
-          : ''
-      )
-      + ' ' +
-      (
-        months
-          ? `${months} ${this.calcService.numWord(months,['месяц', 'месяца', 'месяцев'])}`
-          : ''
-      );
+        this.numWord.transform(years, ['год', 'года', 'лет'])
+        + ' '
+        + this.numWord.transform(months, ['месяц', 'месяца', 'месяцев'])
+    )
   }
 
   get formValue() {

@@ -3,10 +3,10 @@ import {
   Component,
   forwardRef,
   Input,
-  OnInit,
+  OnInit, Self,
   ViewChild,
 } from '@angular/core';
-import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
 import { InputNumber } from 'primeng/inputnumber';
 
 
@@ -14,13 +14,13 @@ import { InputNumber } from 'primeng/inputnumber';
   selector: 'app-calc-input',
   templateUrl: './calc-input.component.html',
   styleUrls: ['./calc-input.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => CalcInputComponent),
-      multi: true,
-    },
-  ],
+  // providers: [
+  //   {
+  //     provide: NG_VALUE_ACCESSOR,
+  //     useExisting: forwardRef(() => CalcInputComponent),
+  //     multi: true,
+  //   },
+  // ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CalcInputComponent implements ControlValueAccessor, OnInit {
@@ -35,6 +35,10 @@ export class CalcInputComponent implements ControlValueAccessor, OnInit {
 
   private onChange!: (value: number) => void;
   private onTouched!: () => void;
+
+  constructor(@Self() private readonly ngControl: NgControl) {
+    this.ngControl.valueAccessor = this;
+  }
 
   ngOnInit(): void {
     this.maxlength = `${this.max}`.length;

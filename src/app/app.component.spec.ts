@@ -3,7 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent, IFormValue } from './app.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { CalcService } from './calc.service';
+import { CalcService } from './shared/services/calc.service';
 
 
 describe('AppComponent', () => {
