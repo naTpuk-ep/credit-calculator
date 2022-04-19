@@ -40,33 +40,27 @@ export class AppComponent implements OnInit {
   }
 
   transformLoanRate(value: number): string {
-    return `${value.toLocaleString('ru')} %`;
+    return `${value.toLocaleString('ru')} %`.replace(/ /g, ' ');
   }
 
   transformAmountValue(value: number) {
-    return `${value.toLocaleString('ru')} ₽`;
+    return `${value.toLocaleString('ru')} ₽`.replace(/ /g, ' ');
   }
 
   transformMonths(value: number) {
     const years = Math.floor(value / 12);
     const months = value % 12;
-    return (years ? `${years} ${this.calcService.numWord(
-      years,
-      [
-        'год',
-        'года',
-        'лет',
-      ],
-      )}` : '')
+    return (
+        years
+          ? `${years} ${this.calcService.numWord(years, ['год', 'года', 'лет'])}`
+          : ''
+      )
       + ' ' +
-      (months ? `${months} ${this.calcService.numWord(
-        months,
-        [
-          'месяц',
-          'месяца',
-          'месяцев',
-        ],
-      )}` : '');
+      (
+        months
+          ? `${months} ${this.calcService.numWord(months,['месяц', 'месяца', 'месяцев'])}`
+          : ''
+      );
   }
 
   get formValue() {
@@ -74,10 +68,7 @@ export class AppComponent implements OnInit {
   }
 
   get monthLyAmount() {
-    return this.calcService.getMonthlyAmount({
-      months: this.formValue.months,
-      totalAmount: this.formValue.totalAmount,
-    });
+    return this.calcService.getMonthlyAmount(this.formValue);
   }
 
   get loanRate() {

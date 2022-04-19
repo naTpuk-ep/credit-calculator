@@ -1,10 +1,5 @@
 import { Injectable } from '@angular/core';
-
-
-export interface IMonthlyAmountArguments {
-  totalAmount: number;
-  months: number;
-}
+import { IFormValue } from './app.component';
 
 @Injectable()
 export class CalcService {
@@ -13,7 +8,7 @@ export class CalcService {
   getMonthlyAmount({
     totalAmount,
     months,
-  }: IMonthlyAmountArguments) {
+  }: IFormValue) {
     const shareRate = this.loanRate / 100 / 12;
     const monthlyAmount = totalAmount * shareRate / (1 - (1 + shareRate) ** (-months));
     return Math.ceil(monthlyAmount);

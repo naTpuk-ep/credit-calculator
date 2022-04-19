@@ -22,6 +22,7 @@ describe('CalcService', () => {
     let monthlyAmount = calcService.getMonthlyAmount({
       totalAmount: 30000,
       months: 6,
+      switch: false,
     });
     expect(monthlyAmount)
       .toBe(5235);
@@ -29,6 +30,7 @@ describe('CalcService', () => {
     monthlyAmount = calcService.getMonthlyAmount({
       totalAmount: 7000000,
       months: 84,
+      switch: false,
     });
     expect(monthlyAmount)
       .toBe(138637);
